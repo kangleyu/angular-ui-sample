@@ -1,0 +1,15 @@
+{
+  "name": "angular-bootstrap-play",
+  "version": "1.0.0",
+  "description": "Playground for angular UI components",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Yu",
+  "license": "ISC"
+}
