@@ -45,10 +45,10 @@ angular.module('bootstrap.module', [])
     templateUrl: "bootstrap/templates/dropdown.html",
     controller: "DropdownCtrl"
   })
-  .state('bootstrap.model', {
-    url: '/model',
-    templateUrl: "bootstrap/templates/model.html",
-    controller: "ModelCtrl"
+  .state('bootstrap.modal', {
+    url: '/modal',
+    templateUrl: "bootstrap/templates/modal.html",
+    controller: "ModalCtrl"
   })
   .state('bootstrap.pager', {
     url: '/pager',

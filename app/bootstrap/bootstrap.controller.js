@@ -239,17 +239,91 @@ angular.module('bootstrap.module')
   
   $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 }])
-.controller('ModelCtrl', [ '$scope', function($scope) {
+.controller('ModalCtrl', [ '$scope', '$uibModal', '$log', function($scope, $uibModal, $log) {
+  $scope.items = ["item1", "item2", "item3"];
+  $scope.animationsEnabled = true;
+  $scope.open = function(size) {
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'modalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        items: function() {
+          return $scope.items;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(selectedItem) {
+      $scope.selected = selectedItem;
+    }, function() {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+  $scope.toggleAnimation = function() {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+}])
+.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'items', function($scope, $uibModalInstance, items){
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
   
+  $scope.ok = function() {
+    $uibModalInstance.close($scope.selected.item);
+  };
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }
 }])
 .controller('PagerCtrl', [ '$scope', function($scope) {
-  
+  $scope.totalItems = 64;
+  $scope.currentPage = 4;
 }])
-.controller('PaginationCtrl', [ '$scope', function($scope) {
+.controller('PaginationCtrl', [ '$scope', '$log', function($scope, $log) {
+  $scope.totalItems = 64;
+  $scope.currentPage = 4;
   
+  $scope.setPage = function(pageNo) {
+    $scope.currentPage = pageNo;
+  };
+  
+  $scope.pageChanged = function() {
+    $log.log('Page changed to: ' + $scope.currentPage);
+  };
+  
+  $scope.maxSize = 5;
+  $scope.bigTotalItems = 175;
+  $scope.bigCurrentPage = 1;
 }])
-.controller('PopoverCtrl', [ '$scope', function($scope) {
+.controller('PopoverCtrl', [ '$scope', '$sce', function($scope, $sce) {
+  $scope.dynamicPopover = {
+    content: 'Hello, World!',
+    templateUrl: 'popoverTemplate.html',
+    title: 'Title'
+  };
   
+  $scope.placement = {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'left-top',
+      'left-bottom',
+      'right',
+      'right-top',
+      'right-bottom'
+    ],
+    selected: 'top'
+  };
+  
+  $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
 }])
 .controller('PositionCtrl', [ '$scope', function($scope) {
   
