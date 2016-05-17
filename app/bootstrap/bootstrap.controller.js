@@ -325,14 +325,86 @@ angular.module('bootstrap.module')
   
   $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
 }])
-.controller('PositionCtrl', [ '$scope', function($scope) {
-  
+.controller('PositionCtrl', [ '$scope', '$window', '$uibPosition', function($scope, $window, $uibPosition) {
+  $scope.elemVals = {};
+  $scope.parentScrollable = true;
+  $scope.parentRelative = true;
+
+  $scope.getValues = function() {
+    var divEl = $window.document.querySelector('#posdemodiv');
+    var btnEl = $window.document.querySelector('#posdemobtn');
+
+    var offsetParent = $uibPosition.offsetParent(divEl);
+    $scope.elemVals.offsetParent = 'type: ' + offsetParent.tagName + ', id: ' + offsetParent.id;
+
+    var scrollParent = $uibPosition.scrollParent(divEl);
+    $scope.elemVals.scrollParent = 'type: ' + scrollParent.tagName + ', id: ' + scrollParent.id;
+
+    $scope.scrollbarWidth = $uibPosition.scrollbarWidth();
+
+    $scope.elemVals.position = $uibPosition.position(divEl);
+
+    $scope.elemVals.offset = $uibPosition.offset(divEl);
+
+    $scope.elemVals.viewportOffset = $uibPosition.viewportOffset(divEl);
+
+    $scope.elemVals.positionElements = $uibPosition.positionElements(btnEl, divEl, 'auto bottom-left');
+  };
 }])
 .controller('ProgressbarCtrl', [ '$scope', function($scope) {
+  $scope.max = 200;
   
+  $scope.random = function() {
+    var value = Math.floor(Math.random() * 100 + 1);
+    var type;
+    
+    if (value < 25) {
+      type = "success";
+    } else if (value < 50) {
+      type = "info";
+    } else if (value < 75) {
+      type = "warning";
+    } else {
+      type = "danger";
+    }
+    
+    $scope.showWarning = type === "danger" || type === "warning";
+    
+    $scope.dynamic = value;
+    $scope.type = type;
+  };
+  $scope.random();
+  $scope.randomStacked = function() {
+    $scope.stacked = [];
+    var types = ["success", "info", "warning", "danger"];
+    
+    for (var i = 0, n = Math.floor(Math.random() * 4 + 1); i < n; i++) {
+      var index = Math.floor(Math.random() * 4);
+      $scope.stacked.push({
+        value: Math.floor(Math.random() * 30 + 1),
+        type: types[index]
+      });
+    }
+  };
+  $scope.randomStacked();
 }])
 .controller('RatingCtrl', [ '$scope', function($scope) {
+  $scope.rate = 7;
+  $scope.max = 10;
+  $scope.isReadonly = false;
   
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  };
+  
+  $scope.ratingStates = [
+    { stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+    { stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+    { stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+    { stateOn: 'glyphicon-heart'},
+    { stateOn: 'glyphicon-off'},
+  ];
 }])
 .controller('TabsCtrl', [ '$scope', function($scope) {
   
