@@ -406,14 +406,73 @@ angular.module('bootstrap.module')
     { stateOn: 'glyphicon-off'},
   ];
 }])
-.controller('TabsCtrl', [ '$scope', function($scope) {
+.controller('TabsCtrl', [ '$scope', '$window', function($scope, $window) {
+  $scope.tabs = [
+    { title: 'Dynamic Title 1', content: 'Dynamic content 1' },
+    { title: 'Dynamic Title 2', content: 'Dynamic content 2' }
+  ];
+  $scope.alertMe = function() {
+    setTimeout(function() {
+      $window.alert('You\'ve selected the alert tab!');
+    });
+  };
   
+  $scope.model = {
+    name: 'Tabs'
+  };
 }])
-.controller('TimepickerCtrl', [ '$scope', function($scope) {
+.controller('TimepickerCtrl', [ '$scope', '$log', function($scope, $log) {
+  $scope.mytime = new Date();
   
+  $scope.hstep = 1;
+  $scope.mstep = 15;
+  
+  $scope.options = {
+    hstep: [1, 2, 3],
+    mstep: [1, 5, 10, 15, 25, 30]
+  };
+  
+  $scope.ismeridian = true;
+  $scope.toggleMode = function() {
+    $scope.ismeridian = !$scope.ismeridian;
+  };
+  
+  $scope.update = function() {
+    var d = new Date();
+    d.setHours(14);
+    d.setMinutes(0);
+    $scope.mytime = d;
+  };
+  
+  $scope.changed = function() {
+    $log.log('Time changed to: ' + $scope.mytime);
+  };
+  
+  $scope.clear = function() {
+    $scope.mytime = null;
+  };
 }])
-.controller('TooltipCtrl', [ '$scope', function($scope) {
-  
+.controller('TooltipCtrl', [ '$scope', '$sce', function($scope, $sce) {
+  $scope.dynamicTooltip = 'Hello World!';
+  $scope.dynamicTooltipText = "dynamic";
+  $scope.htmlTooltip = $sce.trustAsHtml("I\'ve ben made <b>bold</b>!");
+  $scope.placement = {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'left-top',
+      'left-bottom',
+      'right',
+      'right-top',
+      'right-bottom'
+    ],
+    selected: 'top'
+  };
 }])
 .controller('TypeaheadCtrl', [ '$scope', function($scope) {
   
