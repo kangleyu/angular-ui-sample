@@ -127,6 +127,7 @@ angular.module('bootstrap.module')
   $scope.format = "yyyy/MM/dd";
   $scope.date = new Date();
 }])
+// DatePicker Demo Controller
 .controller('DatepickerCtrl', [ '$scope', function($scope) {
   $scope.today = function () {
     $scope.dt = new Date();
@@ -217,6 +218,7 @@ angular.module('bootstrap.module')
     return '';
   };
 }])
+// Dropdown Demo Controller
 .controller('DropdownCtrl', [ '$scope', '$log', function($scope, $log) {
   $scope.items = [
     'The first choice!',
@@ -239,6 +241,7 @@ angular.module('bootstrap.module')
   
   $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 }])
+// Modal demo controller
 .controller('ModalCtrl', [ '$scope', '$uibModal', '$log', function($scope, $uibModal, $log) {
   $scope.items = ["item1", "item2", "item3"];
   $scope.animationsEnabled = true;
@@ -265,6 +268,7 @@ angular.module('bootstrap.module')
     $scope.animationsEnabled = !$scope.animationsEnabled;
   };
 }])
+// Modal instance controller
 .controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'items', function($scope, $uibModalInstance, items){
   $scope.items = items;
   $scope.selected = {
@@ -278,10 +282,12 @@ angular.module('bootstrap.module')
     $uibModalInstance.dismiss('cancel');
   }
 }])
+// Pager Demo Controller
 .controller('PagerCtrl', [ '$scope', function($scope) {
   $scope.totalItems = 64;
   $scope.currentPage = 4;
 }])
+// Pagination Demo Controller
 .controller('PaginationCtrl', [ '$scope', '$log', function($scope, $log) {
   $scope.totalItems = 64;
   $scope.currentPage = 4;
@@ -298,6 +304,7 @@ angular.module('bootstrap.module')
   $scope.bigTotalItems = 175;
   $scope.bigCurrentPage = 1;
 }])
+// Popover Demo Controller
 .controller('PopoverCtrl', [ '$scope', '$sce', function($scope, $sce) {
   $scope.dynamicPopover = {
     content: 'Hello, World!',
@@ -351,6 +358,7 @@ angular.module('bootstrap.module')
     $scope.elemVals.positionElements = $uibPosition.positionElements(btnEl, divEl, 'auto bottom-left');
   };
 }])
+// Progressbar Demo Controller
 .controller('ProgressbarCtrl', [ '$scope', function($scope) {
   $scope.max = 200;
   
@@ -388,6 +396,7 @@ angular.module('bootstrap.module')
   };
   $scope.randomStacked();
 }])
+// Rating Demo Controller
 .controller('RatingCtrl', [ '$scope', function($scope) {
   $scope.rate = 7;
   $scope.max = 10;
@@ -406,6 +415,7 @@ angular.module('bootstrap.module')
     { stateOn: 'glyphicon-off'},
   ];
 }])
+// Tabs Demo Controller
 .controller('TabsCtrl', [ '$scope', '$window', function($scope, $window) {
   $scope.tabs = [
     { title: 'Dynamic Title 1', content: 'Dynamic content 1' },
@@ -421,6 +431,7 @@ angular.module('bootstrap.module')
     name: 'Tabs'
   };
 }])
+// Timepicker Demo Controller
 .controller('TimepickerCtrl', [ '$scope', '$log', function($scope, $log) {
   $scope.mytime = new Date();
   
@@ -452,6 +463,7 @@ angular.module('bootstrap.module')
     $scope.mytime = null;
   };
 }])
+// Tooltip Demo Controller
 .controller('TooltipCtrl', [ '$scope', '$sce', function($scope, $sce) {
   $scope.dynamicTooltip = 'Hello World!';
   $scope.dynamicTooltipText = "dynamic";
@@ -474,6 +486,7 @@ angular.module('bootstrap.module')
     selected: 'top'
   };
 }])
+// Typeahead Demo Controller
 .controller('TypeaheadCtrl', [ '$scope', '$http', function($scope, $http) {
   var _selected;
   $scope.selected = undefined;
